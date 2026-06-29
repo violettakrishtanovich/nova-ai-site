@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NOVA AI Systems</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #f5edf7;
+      color: #3d2a45;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .hero-wrapper {
+      position: relative;
+      border-radius: 0 0 40px 40px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      min-height: 400px;
+    }
+
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1694903110330-cc64b7e1d21d?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 40px 0 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 30px;
+      min-height: 400px;
+      justify-content: center;
+    }
+
+    .header {
+      padding: 10px 0 20px;
+      border-bottom: 1px solid rgba(232, 216, 236, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #c490b0, #b080c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .logo i {
+      -webkit-text-fill-color: #c490b0;
+      margin-right: 6px;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #3d2a45;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-content h1 span {
+      background: linear-gradient(135deg, #d4a0c0, #b888d0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(145deg, #c898d8, #b080c0);
+      color: #fff;
+      font-weight: 600;
+      padding: 20px 60px;
+      border-radius: 60px;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 8px 24px rgba(180, 120, 200, 0.25);
+      text-decoration: none;
+      margin: 0 auto;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.02);
+      background: linear-gradient(145deg, #d4a8e0, #c090d0);
+      box-shadow: 0 12px 32px rgba(180, 120, 200, 0.35);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+      color: #3d2a45;
+      text-align: center;
+    }
+    .section-sub {
+      color: #8a6a92;
+      margin-bottom: 12px;
+      display: block;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+      margin: 40px 0 56px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 28px 20px;
+      border: 1px solid #e8d8ec;
+      transition: 0.25s;
+      box-shadow: 0 4px 12px rgba(180, 120, 200, 0.06);
+      text-align: center;
+    }
+    .card:hover {
+      border-color: #c898d8;
+      box-shadow: 0 8px 24px rgba(180, 120, 200, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      font-size: 2.6rem;
+      color: #c898d8;
+      margin-bottom: 16px;
+    }
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #3d2a45;
+    }
+    .card p {
+      color: #6a4a72;
+      font-size: 0.95rem;
+    }
+
+    .highlight-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: rgba(200, 152, 216, 0.10);
+      padding: 20px 28px;
+      border-radius: 60px;
+      border-left: 4px solid #c898d8;
+      color: #3d2a45;
+      margin: 12px auto 24px;
+      display: block;
+      text-align: center;
+      max-width: 900px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin: 24px 0 56px;
+    }
+    .case-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 26px 22px;
+      border: 1px solid #e8d8ec;
+      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(180, 120, 200, 0.06);
+      text-align: center;
+    }
+    .case-card:hover {
+      border-color: #c898d8;
+      box-shadow: 0 8px 24px rgba(180, 120, 200, 0.12);
+      transform: translateY(-2px);
+    }
+    .case-card .badge {
+      background: #f5edf7;
+      color: #8a6a92;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-bottom: 12px;
+      border: 1px solid #e8d8ec;
+    }
+    .case-card h4 {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+      color: #3d2a45;
+    }
+    .case-card .stat {
+      color: #b888d0;
+      font-weight: 700;
+      font-size: 1.6rem;
+      margin-top: 12px;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin: 32px 0 56px;
+    }
+    .process-step {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px 18px;
+      border: 1px solid #e8d8ec;
+      box-shadow: 0 4px 12px rgba(180, 120, 200, 0.06);
+      transition: 0.2s;
+      text-align: center;
+    }
+    .process-step:hover {
+      border-color: #c898d8;
+      box-shadow: 0 8px 24px rgba(180, 120, 200, 0.12);
+      transform: translateY(-2px);
+    }
+    .step-num {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #dcc4e0;
+      margin-bottom: 4px;
+    }
+    .process-step h4 {
+      font-size: 1.2rem;
+      margin: 8px 0 6px;
+      color: #3d2a45;
+    }
+    .process-step p {
+      color: #6a4a72;
+      font-size: 0.95rem;
+    }
+
+    .form-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      background: #ffffff;
+      border-radius: 40px;
+      padding: 40px 32px;
+      margin: 48px 0 64px;
+      border: 1px solid #e8d8ec;
+      box-shadow: 0 4px 20px rgba(180, 120, 200, 0.08);
+    }
+    .form-left {
+      flex: 1 1 280px;
+    }
+    .form-left h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #3d2a45;
+    }
+    .form-left h2 i {
+      color: #c898d8;
+    }
+    .form-left p {
+      color: #6a4a72;
+    }
+    .form-right {
+      flex: 2 1 340px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #5a3a62;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: #faf5fc;
+      border: 1px solid #e8d8ec;
+      border-radius: 30px;
+      color: #3d2a45;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #c898d8;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(200, 152, 216, 0.10);
+    }
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+      border-radius: 24px;
+    }
+    .btn-submit {
+      background: linear-gradient(145deg, #c898d8, #b080c0);
+      border: none;
+      padding: 16px 40px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+      max-width: 260px;
+      box-shadow: 0 6px 20px rgba(180, 120, 200, 0.25);
+    }
+    .btn-submit:hover {
+      background: linear-gradient(145deg, #d4a8e0, #c090d0);
+      transform: scale(1.01);
+      box-shadow: 0 8px 28px rgba(180, 120, 200, 0.35);
+    }
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .footer {
+      padding: 28px 0 20px;
+      border-top: 1px solid #e8d8ec;
+      color: #8a6a92;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      text-align: center;
+    }
+
+    /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
+    @media (max-width: 640px) {
+      .hero-content {
+        padding: 20px 0 32px;
+        gap: 20px;
+        min-height: 300px;
+      }
+      .hero-wrapper {
+        min-height: 300px;
+      }
+      .hero-content h1 {
+        font-size: 1.4rem;
+        line-height: 1.3;
+      }
+      .btn-primary {
+        width: 100%;
+        text-align: center;
+        padding: 14px 28px;
+        font-size: 1rem;
+        max-width: 320px;
+      }
+      .form-section {
+        padding: 28px 16px;
+      }
+      .btn-submit {
+        max-width: 100%;
+      }
+      .logo {
+        font-size: 26px;
+      }
+      .highlight-text {
+        font-size: 1rem;
+        padding: 14px 16px;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      .grid-4 {
+        gap: 16px;
+      }
+      .card {
+        padding: 20px 16px;
+      }
+      .grid-3 {
+        gap: 16px;
+      }
+      .case-card {
+        padding: 20px 16px;
+      }
+      .process-grid {
+        gap: 16px;
+      }
+      .process-step {
+        padding: 18px 14px;
+      }
+      .form-left h2 {
+        font-size: 1.5rem;
+      }
+      .form-left p {
+        font-size: 1rem;
+      }
+    }
+
+    /* ===== ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ ===== */
+    @media (max-width: 400px) {
+      .hero-content h1 {
+        font-size: 1.2rem;
+      }
+      .btn-primary {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        max-width: 280px;
+      }
+      .logo {
+        font-size: 22px;
+      }
+      .highlight-text {
+        font-size: 0.9rem;
+        padding: 12px 14px;
+      }
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px 24px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 500;
+      z-index: 9999;
+      animation: slideIn 0.3s ease;
+      max-width: 400px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+    .notification.success {
+      background: #b080c0;
+    }
+    .notification.error {
+      background: #d09090;
+    }
+    .notification.info {
+      background: #b098c0;
+    }
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .badge i, .card-icon i, .stat i {
+      color: #c898d8;
+    }
+    .form-left .fa-star {
+      color: #d4a0c0 !important;
+    }
+    .form-group label i {
+      color: #b888d0;
+      margin-right: 6px;
+    }
+    .highlight-text i {
+      color: #c898d8 !important;
+    }
+    .form-left .badge-wrapper {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    @media (max-width: 640px) {
+      .form-left .badge-wrapper {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="hero-wrapper">
+      <div class="hero-background"></div>
+      <div class="hero-content">
+        <header class="header">
+          <div class="logo">
+            <i class="fas fa-brain"></i> NOVA AI Systems
+          </div>
+        </header>
+
+        <h1>Специалист по <span>автоматизации продаж</span> малого бизнеса, <span>Виолетта</span></h1>
+
+        <button class="btn-primary" data-scroll-to="free-audit">
+          <i class="fas fa-microphone-alt" style="margin-right: 12px;"></i>Получить бесплатный аудит
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <span class="section-sub">что мы создаем</span>
+      <div class="highlight-text">
+        <i class="fas fa-quote-right" style="margin-right: 12px;"></i>
+        Чат-боты, AI-системы поддержки, сценарии общения и продающие лендинги.
+      </div>
+    </div>
+
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-headset"></i></div>
+        <h3>Support System</h3>
+        <p>Сценарии общения, FAQ и база ответов для поддержки.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-comment-dots"></i></div>
+        <h3>AI Chat Bot</h3>
+        <p>Telegram-боты и сайт-боты для заявок, консультаций и продаж.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-rocket"></i></div>
+        <h3>Landing + Bot</h3>
+        <p>Продающий лендинг с автоматической обработкой обращений.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-cogs"></i></div>
+        <h3>Автоматизация</h3>
+        <p>Интеграция с CRM, рассылки, триггерные сценарии.</p>
+      </div>
+    </div>
+
+    <span class="section-sub">мои кейсы</span>
+    <h2 class="section-title">Мои кейсы</h2>
+
+    <div class="grid-3">
+      <div class="case-card">
+        <span class="badge"><i class="fas fa-store"></i> Beauty Store</span>
+        <h4>Задача: ускорить обработку клиентов</h4>
+        <p style="color:#6a4a72; margin: 10px 0;">Решение: AI-бот и лендинг</p>
+        <div class="stat">+40% конверсии</div>
+      </div>
+      <div class="case-card">
+        <span class="badge"><i class="fas fa-laptop-code"></i> IT-Аутсорсинг</span>
+        <h4>Задача: автоматизировать заявки</h4>
+        <p style="color:#6a4a72; margin: 10px 0;">Решение: Telegram-бот и CRM</p>
+        <div class="stat">24/7 обработка</div>
+      </div>
+      <div class="case-card">
+        <span class="badge"><i class="fas fa-graduation-cap"></i> Образовательный центр</span>
+        <h4>Задача: регистрация на курсы</h4>
+        <p style="color:#6a4a72; margin: 10px 0;">Решение: лендинг и чат-бот</p>
+        <div class="stat">200+ заявок</div>
+      </div>
+    </div>
+
+    <span class="section-sub">процесс</span>
+    <h2 class="section-title">Как я работаю</h2>
+
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <h4>Анализ бизнеса</h4>
+        <p>Изучаем ваш продукт, аудиторию и типовые запросы клиентов.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <h4>Тестовая система</h4>
+        <p>Готовим сценарии, FAQ и логику диалогов под реальные задачи.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <h4>Сборка решения</h4>
+        <p>Создаем бота, лендинг и связку для приема заявок.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <h4>Внедрение</h4>
+        <p>Передаем готовую систему и помогаем запустить ее в работу.</p>
+      </div>
+    </div>
+
+    <div id="free-audit" class="form-section">
+      <div class="form-left">
+        <h2><i class="fas fa-star"></i> Бесплатный аудит</h2>
+        <p style="font-size: 1.1rem; margin-top: 12px;">Опишите проект, и я подскажу, какую AI-систему стоит запускать первой.</p>
+        <div class="badge-wrapper">
+          <span style="background: #f5edf7; padding: 6px 20px; border-radius: 40px; font-size: 0.9rem; color: #6a4a72; border: 1px solid #e8d8ec;"><i class="fas fa-check-circle" style="color:#c898d8;"></i> Бесплатно</span>
+          <span style="background: #f5edf7; padding: 6px 20px; border-radius: 40px; font-size: 0.9rem; color: #6a4a72; border: 1px solid #e8d8ec;"><i class="fas fa-clock" style="color:#c898d8;"></i> 15 мин</span>
+        </div>
+      </div>
+      <div class="form-right">
+        <form id="contactForm">
+          <div class="form-group">
+            <label><i class="far fa-user"></i> Ваше имя</label>
+            <input type="text" id="userName" name="name" placeholder="Алексей" required />
+          </div>
+          <div class="form-group">
+            <label><i class="far fa-envelope"></i> Ваш Email</label>
+            <input type="email" id="userEmail" name="email" placeholder="alex@example.com" required />
+          </div>
+          <div class="form-group">
+            <label><i class="fab fa-telegram"></i> Telegram</label>
+            <input type="text" id="userTelegram" name="telegram" placeholder="@alex_bot" />
+          </div>
+          <div class="form-group">
+            <label><i class="far fa-comment"></i> Опишите ваш проект</label>
+            <textarea id="userProject" name="project" placeholder="Кратко опишите бизнес и задачи..."></textarea>
+          </div>
+          <button type="button" class="btn-submit" id="submitBtn">
+            <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>Отправить заявку
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>© 2026 NOVA AI Systems</span>
+      <span><i class="fas fa-robot"></i> AI-поддержка 24/7</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ========== СКРОЛЛ К ФОРМЕ ==========
+      const scrollButtons = document.querySelectorAll('[data-scroll-to="free-audit"]');
+      const targetElement = document.getElementById('free-audit');
+
+      if (scrollButtons.length && targetElement) {
+        scrollButtons.forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 30;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          });
+        });
+      }
+
+      // ========== ФУНКЦИЯ ДЛЯ УВЕДОМЛЕНИЙ ==========
+      function showNotification(message, type = 'info') {
+        const existing = document.querySelector('.notification');
+        if (existing) existing.remove();
+
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.style.opacity = '0';
+          notification.style.transition = 'opacity 0.3s';
+          setTimeout(() => notification.remove(), 300);
+        }, 5000);
+      }
+
+      // ========== ОТПРАВКА ФОРМЫ В TELEGRAM ==========
+      const submitBtn = document.getElementById('submitBtn');
+
+      submitBtn.addEventListener('click', async function() {
+        const name = document.getElementById('userName').value.trim();
+        const email = document.getElementById('userEmail').value.trim();
+        const telegram = document.getElementById('userTelegram').value.trim();
+        const project = document.getElementById('userProject').value.trim();
+
+        if (!name || !email) {
+          showNotification('Пожалуйста, заполните имя и email.', 'error');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i>Отправка...';
+
+        const BOT_TOKEN = '8619679968:AAFCPwyuQipzHyPR3g_B9R2Znk99K1ylAG0';
+        const CHAT_ID = '1179953952';
+
+        const message = `📩 *Новая заявка с NOVA AI*%0A%0A👤 Имя: ${encodeURIComponent(name)}%0A📧 Email: ${encodeURIComponent(email)}%0A📱 Telegram: ${encodeURIComponent(telegram || '—')}%0A📝 Проект: ${encodeURIComponent(project || '—')}`;
+
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${message}&parse_mode=Markdown`;
+
+        try {
+          const response = await fetch(url);
+          const result = await response.json();
+
+          if (result.ok) {
+            showNotification('✅ Заявка успешно отправлена! Я свяжусь с вами.', 'success');
+            document.getElementById('userName').value = '';
+            document.getElementById('userEmail').value = '';
+            document.getElementById('userTelegram').value = '';
+            document.getElementById('userProject').value = '';
+          } else {
+            console.error('Telegram API error:', result);
+            const errorMsg = result.description || 'Неизвестная ошибка';
+            showNotification(`❌ Ошибка: ${errorMsg}`, 'error');
+          }
+        } catch (error) {
+          console.error('Fetch error:', error);
+          showNotification('⚠️ Не удалось отправить заявку. Проверьте интернет.', 'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right: 10px;"></i>Отправить заявку';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
